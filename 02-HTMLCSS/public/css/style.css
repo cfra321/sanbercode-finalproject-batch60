@@ -1,0 +1,45 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: Ghost White;
+  }
+  
+  .container {
+    box-shadow: 0px 0px 80px 3px rgba(79, 76, 76, 0.53);
+    -webkit-box-shadow: 0px 0px 80px 3px rgba(79, 76, 76, 0.53);
+    -moz-box-shadow: 0px 0px 80px 3px rgba(79, 76, 76, 0.53);
+    border-radius: 15px;
+    width: 1100px;
+    height: 450px;
+    padding: 50px;
+    background-color: white;
+  }
+  
+  .container__bottom {
+    padding-top: 30px;
+    padding-bottom: 30px ;
+    padding-left: 0;
+    padding-right: 0px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  button {
+    background-color: #a149fa;
+    width: 100%;
+    border: none;
+    border-radius: 13px;
+    height: 45px;
+    color: white;
+  }
+  
+  .article {
+    border-bottom: solid #9494943d;
+  }
+  
+  button:hover {
+      background-color: #7e2bda; /* Warna lebih gelap saat hover */
+    }
