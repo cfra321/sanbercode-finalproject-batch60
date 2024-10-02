@@ -2,43 +2,55 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 40px;
-  margin-top: 40px;
-  
+  margin: 25px; /* Remove extra margins */
 }
 
-.container{
+.container {
   padding: 20px;
   border-radius: 10px;
   background: #ffffff;
-  box-shadow:  5px 5px 12px #666666,
-               -5px -5px 12px #ffffff;  width: 50%;
-  height: 150px;
-  margin: 50px;
+  box-shadow: 5px 5px 12px #666666, -5px -5px 12px #ffffff;
+  width: 100%; /* Make it responsive */
+  max-width: 800px; /* Limit the width to a reasonable size */
+  height: auto; /* Remove fixed height to allow the container to grow */
+  margin: 20px; /* Adjust margin */
 }
 
-.container-table{
+.container h1 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0; /* Remove default padding */
+  margin: 0;
+}
+
+li {
+  margin-bottom: 8px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+p {
+  text-align: center;
+}
+
+.btnnn {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+}
+
+.container-table {
   padding: 20px;
   margin-bottom: 30px;
   border-radius: 10px;
   margin-top: 30px;
-  width: 50%;
-  box-shadow:  5px 5px 12px #666666,
-               -5px -5px 12px #ffffff;  
-  
-
-}
-
-.h1{
-
-}
-
-p{
-  text-align: center;
-}
-
-.btnnn{
-  width: 100%;
-  height: 40px;
-  border-radius: 5px;
+  width: 100%; /* Responsive width */
+  max-width: 600px; /* Limit width */
+  box-shadow: 5px 5px 12px #666666, -5px -5px 12px #ffffff;
 }

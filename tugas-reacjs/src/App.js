@@ -1,17 +1,16 @@
+import React from "react";
 import "./App.css";
+import Tugas6 from "./tugas_6/tugas6"; 
+import Tugas7 from "./tugas_7/tugas7";
 
 function App() {
   return (
     <>
-      <div className="App">
-        <div className="container">
-          <h1>Hi, Kukuh Wicaksono</h1>
-          <hr></hr>
-          <small>Saya dari Batch 60 sudah berhasil menginstall React</small>
-        </div>
-      </div>
+      <Tugas6 /> 
+      <Tugas7  name="nama anda" batch="batch anda" email="email anda"/>
     </>
   );
 }
 
 export default App;
+
