@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Tugas6 /> 
-      <Tugas7  name="nama anda" batch="batch anda" email="email anda"/>
+      <Tugas7  name="Kukuh Wicaksono" batch="60" email="kukuhwickasono105xb@gmail.com"/>
     </>
   );
 }
