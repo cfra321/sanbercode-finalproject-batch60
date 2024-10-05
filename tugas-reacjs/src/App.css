@@ -11,7 +11,6 @@
   background: #ffffff;
   box-shadow: 5px 5px 12px #666666, -5px -5px 12px #ffffff;
   width: 100%; /* Make it responsive */
-  max-width: 800px; /* Limit the width to a reasonable size */
   height: auto; /* Remove fixed height to allow the container to grow */
   margin: 20px; /* Adjust margin */
 }
@@ -43,6 +42,11 @@ p {
   border-radius: 5px;
   cursor: pointer;
   border: 1px solid #ccc;
+  background: #20b90b;
+}
+.btnnn:disabled {
+  background-color: lightgrey;
+  cursor: not-allowed;
 }
 
 .container-table {
@@ -53,4 +57,12 @@ p {
   width: 100%; /* Responsive width */
   max-width: 600px; /* Limit width */
   box-shadow: 5px 5px 12px #666666, -5px -5px 12px #ffffff;
+}
+
+.border-radius{
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%; /* Make it responsive */
+  height: auto; /* Remove fixed height to allow the container to grow */
+ 
 }
