@@ -5,7 +5,8 @@ import "../App.css";
 const Tugas9 = () => {
   return (
     <div className="App">
-      <table className="w-full text-sm relative overflow-x-auto container ">
+      <div className="container">
+      <table className="w-full text-sm relative overflow-x-auto  ">
         <thead className="text-xs bg-purple-700 text-white uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="px-6 py-3">
@@ -135,6 +136,7 @@ const Tugas9 = () => {
           </tr>
         </tbody>
       </table>
+    </div>
     </div>
   
   );
