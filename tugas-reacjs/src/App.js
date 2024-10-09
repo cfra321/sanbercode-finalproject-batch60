@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import Tugas10 from "./tugas_10/tugas10";
+import Tugas11 from "./tugas_11/tugas11";
 function App() {
   return (
     <>
@@ -8,7 +8,7 @@ function App() {
       <Tugas7  name="Kukuh Wicaksono" batch="60" email="kukuhwickasono105xb@gmail.com"/>
       <Tugas8/>
       <Tugas9/> */}
-      <Tugas10/>
+      <Tugas11/>
     </>
   );
 }
