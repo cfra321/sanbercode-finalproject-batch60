@@ -14,7 +14,16 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Tugas6 />} />
-        <Route path="/tugas7" element={<Tugas7 />} />
+        <Route 
+          path="/tugas7"  
+          element={
+            <Tugas7 
+              name="Kukuh Wicaksono" 
+              email="kukuhwicaksono105xb@gmail.com" 
+              batch="Batch 60" 
+            />
+          } 
+        />
         <Route path="/tugas8" element={<Tugas8 />} />
         <Route path="/tugas9" element={<Tugas9 />} />
         <Route path="/tugas10" element={<Tugas10 />} />
