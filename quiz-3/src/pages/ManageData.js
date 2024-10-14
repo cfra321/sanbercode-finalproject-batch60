@@ -19,12 +19,16 @@ const ManageData = () => {
   const [fetchStatus, setFetchStatus] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
 
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5); // Number of items per page
+
   useEffect(() => {
     if (fetchStatus) {
       axios
         .get("https://quiz-api-rho.vercel.app/api/mobile-apps")
         .then((res) => {
-          setData(res.data); // Adjust this line if the API response structure is different
+          setData(res.data);
           setFetchStatus(false);
         })
         .catch((error) => {
@@ -41,7 +45,6 @@ const ManageData = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Validasi input
     const requiredFields = [
       "name",
       "description",
@@ -55,11 +58,10 @@ const ManageData = () => {
     for (const field of requiredFields) {
       if (!input[field]) {
         console.error(`Field ${field} is required`);
-        return; // Hentikan proses jika ada field yang kosong
+        return;
       }
     }
 
-    // Proses pengiriman data
     const {
       id,
       name,
@@ -88,25 +90,22 @@ const ManageData = () => {
     };
 
     if (isEdit) {
-      // Update existing data
       axios
         .put(`https://quiz-api-rho.vercel.app/api/mobile-apps/${id}`, payload)
         .then((res) => {
           console.log("Data updated:", res);
-          resetForm(); // Reset the form after successful update
+          resetForm();
           setFetchStatus(true);
         })
         .catch((error) => {
           console.error("Error updating data:", error);
-          console.log("Input data:", input);
         });
     } else {
-      // Add new data
       axios
         .post("https://quiz-api-rho.vercel.app/api/mobile-apps", payload)
         .then((res) => {
           console.log("Data submitted:", res);
-          resetForm(); // Reset the form after successful submission
+          resetForm();
           setFetchStatus(true);
         })
         .catch((error) => {
@@ -144,7 +143,7 @@ const ManageData = () => {
       image_url: item.image_url,
       is_android_app: item.is_android_app,
       is_ios_app: item.is_ios_app,
-      release_year: item.release_year || "", // Handle if release_year is not present
+      release_year: item.release_year || "",
     });
     setIsEdit(true);
   };
@@ -161,12 +160,23 @@ const ManageData = () => {
       });
   };
 
+  // Pagination logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(data.length / itemsPerPage); // Ensure this is defined
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page); // Ensure this function is defined
+  };
+
   return (
     <div className="container mx-auto my-8">
       <h1 className="text-2xl font-bold mb-4">Manage Data</h1>
 
       <form onSubmit={handleSubmit} className="mb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Form Inputs */}
           <input
             name="name"
             value={input.name}
@@ -200,25 +210,25 @@ const ManageData = () => {
             required
           />
           <input
-             name="price"
-             type="number" 
-             value={input.price}
-             onChange={handleInput}
-             placeholder="Price"
-             className="p-2 border rounded"
-             required
-             min="0" 
-             max="9999999" 
-             step="1" 
+            name="price"
+            type="number"
+            value={input.price}
+            onChange={handleInput}
+            placeholder="Price"
+            className="p-2 border rounded"
+            required
+            min="0"
+            max="9999999"
+            step="1"
           />
           <input
             name="rating"
-            type="number" 
+            type="number"
             value={input.rating}
             onChange={handleInput}
             placeholder="Rating (0-5)"
             className="p-2 border rounded"
-            min="1" 
+            min="1"
             max="5"
             required
           />
@@ -267,77 +277,45 @@ const ManageData = () => {
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs bg-purple-700 text-white uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" className="px-6 py-3">
-                Name
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Description
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Category
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Size
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Price
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Rating
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Image
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Android
-              </th>
-              <th scope="col" className="px-6 py-3">
-                iOS
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Release Year
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Actions
-              </th>
+              <th scope="col" className="px-6 py-3">Name</th>
+              <th scope="col" className="px-6 py-3">Description</th>
+              <th scope="col" className="px-6 py-3">Category</th>
+              <th scope="col" className="px-6 py-3">Size</th>
+              <th scope="col" className="px-6 py-3">Price</th>
+              <th scope="col" className="px-6 py-3">Rating</th>
+              <th scope="col" className="px-6 py-3">Image</th>
+              <th scope="col" className="px-6 py-3">Android</th>
+              <th scope="col" className="px-6 py-3">iOS</th>
+              <th scope="col" className="px-6 py-3">Release Year</th>
+              <th scope="col" className="px-6 py-3">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(data) && data.length === 0 ? (
+            {Array.isArray(currentItems) && currentItems.length === 0 ? (
               <tr>
                 <td colSpan="11" className="px-6 py-4 text-center">
                   No data available
                 </td>
               </tr>
             ) : (
-              (Array.isArray(data) ? data : []).map((item) => (
+              currentItems.map((item) => (
                 <tr
                   key={item._id}
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                 >
-                  <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {item.name}
-                  </td>
+                  <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.name}</td>
                   <td className="px-6 py-4">{item.description}</td>
                   <td className="px-6 py-4">{item.category}</td>
                   <td className="px-6 py-4">{item.size} MB</td>
                   <td className="px-6 py-4">
-                    {item.price === 0 ? "FREE" : `${item.price}`}
-                  </td>
+  {item.price === 0 ? "FREE" : `Rp${new Intl.NumberFormat('id-ID').format(item.price)}`}
+</td>
                   <td className="px-6 py-4">{item.rating}</td>
                   <td className="px-6 py-4">
-                    <img
-                      src={item.image_url}
-                      alt={item.name}
-                      className="w-20 h-20 object-cover"
-                    />
+                    <img src={item.image_url} alt={item.name} className="w-20 h-20 object-cover" />
                   </td>
-                  <td className="px-6 py-4">
-                    {item.is_android_app ? "Yes" : "No"}
-                  </td>
-                  <td className="px-6 py-4">
-                    {item.is_ios_app ? "Yes" : "No"}
-                  </td>
+                  <td className="px-6 py-4">{item.is_android_app ? "Yes" : "No"}</td>
+                  <td className="px-6 py-4">{item.is_ios_app ? "Yes" : "No"}</td>
                   <td className="px-6 py-4">{item.release_year || "-"}</td>
                   <td className="px-6 py-4">
                     <div className="flex space-x-2">
@@ -360,6 +338,27 @@ const ManageData = () => {
             )}
           </tbody>
         </table>
+      </div>
+
+      {/* Pagination Controls */}
+      <div className="flex justify-between mt-4">
+        <button
+          disabled={currentPage === 1}
+          onClick={() => handlePageChange(currentPage - 1)}
+          className="bg-gray-300 p-2 rounded disabled:opacity-50"
+        >
+          Previous
+        </button>
+        <div>
+          Page {currentPage} of {totalPages}
+        </div>
+        <button
+          disabled={currentPage === totalPages}
+          onClick={() => handlePageChange(currentPage + 1)}
+          className="bg-gray-300 p-2 rounded disabled:opacity-50"
+        >
+          Next
+        </button>
       </div>
     </div>
   );

@@ -35,6 +35,7 @@ const Home = () => {
       <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
         {(Array.isArray(data) ? data : [data]).map(app => (
           <div key={app._id} className="h-96 bg-white shadow-lg rounded-lg overflow-hidden flex">
+            <img src={app.image_url} className="w-1/3 object-cover" alt={app.name} />
             <div className="flex flex-col w-2/3 p-4 justify-between">
               <div>
                 <h1 className="text-gray-900 font-bold text-4xl mb-4">{app.name}</h1>
@@ -47,11 +48,11 @@ const Home = () => {
                 </div>
               </div>
               <div className="flex items-center justify-between mt-3">
-                <h1 className="text-gray-700 font-bold text-xl">{app.price === 0 ? 'FREE' : `Rp ${app.price}`}</h1>
+                <h1 className="text-gray-700 font-bold text-xl">  {app.price === 0 ? "FREE" : `Rp${new Intl.NumberFormat('id-ID').format(app.price)}`}</h1>
                 {renderStars(app.rating)}
               </div>
             </div>
-            <img src={app.image_url} className="w-1/3 object-cover" alt={app.name} />
+            
           </div>
         ))}
       </div>
